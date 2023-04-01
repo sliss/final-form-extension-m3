@@ -46,7 +46,8 @@ function addCompleteButtons() {
     completeButton.textContent = "✨Complete";
     completeButton.className = "ff-complete-button";
 
-    completeButton.addEventListener("click", async () => {
+    completeButton.addEventListener("click", async (e) => {
+      e.preventDefault();
       try {
         const response = await fetch("http://localhost:3000/api/status", {
           method: "POST",
@@ -55,8 +56,6 @@ function addCompleteButtons() {
           },
           body: JSON.stringify({ questionText: `${labelText}` }),
         });
-
-        console.log(labelText);
 
         const data = await response.json(); // Save the data returned by the post request in a variable
         console.log("data", data);
