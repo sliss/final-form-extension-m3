@@ -3,10 +3,27 @@
 // (see "content_script" key).
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
+const API_ENDPOINT = 'http://localhost:3000/api/';
 
 console.log(
   "This prints to the console of the page (injected only if the page url matched)"
 );
+
+// start targeting the current URL's firm
+const currentUrl = window.location.href;
+console.log(`researching firm at ${currentUrl}`);
+
+const targetResponse = await fetch(`${API_ENDPOINT}/target`, {
+  method: 'POST',
+  body: JSON.stringify({ url: currentUrl }),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+const targetPartner = await targetResponse.json();
+
+
 let emoModeEnabled = false;
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log("messaged received", request);
@@ -52,11 +69,11 @@ function addCompleteButtons() {
     completeButton.addEventListener("click", async (e) => {
       e.preventDefault();
 
-      // console.log(elem.id, labelText, elem);
+      console.log(elem.id, labelText, elem);
       completeButton.innerHTML = "Thinking...";
       try {
         console.log(`get answers. emo-mode?: ${emoModeEnabled}`);
-        const response = await fetch("http://localhost:3000/api/status", {
+        const response = await fetch(`${API_ENDPOINT}/search`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
