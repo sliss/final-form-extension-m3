@@ -8,16 +8,32 @@ console.log("This prints to the console of the page (injected only if the page u
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('messaged received', request)
-  if (request.message === 'triggered') {
+  if (request === 'triggered') {
       console.log('the popup button was triggered');
+      
+      // add complete buttons.
+      addCompleteButtons();
+
       sendResponse({ message: 'trigger-success' });
   } else if (request.message === 'something_else') {
     // sendResponse({ message: 'success' });
   }
 });
 
-// const questionDivs = getDivsWithInputFields();
-// console.log(questionDivs);
+function addCompleteButtons() {
+  console.log('addCompleteButtons');
+  // Get all <input> and <textarea> elements on the page
+  const inputElems = document.querySelectorAll('input, textarea');
+  console.log('all inputs', inputElems);
+  // Loop through each element and add a "Complete" button after it
+  inputElems.forEach((elem) => {
+    const completeButton = document.createElement('button');
+    completeButton.textContent = '✨Complete';
+    completeButton.className = 'complete-button';
+    elem.insertAdjacentElement('afterend', completeButton);
+  });
+}
+
 
 function getDivsWithInputFields() {
   // Get all <div> elements on the page

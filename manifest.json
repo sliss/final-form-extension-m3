@@ -22,6 +22,7 @@
     },
     "content_scripts": [{
         "js": ["contentScript.js"],
+        "css": ["contentStyle.css"],
         "matches": ["<all_urls>"]
     }]
 }

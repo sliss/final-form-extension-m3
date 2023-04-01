@@ -1,0 +1,12 @@
+.complete-button {
+  background-color: #bb05bb;
+  color: white;
+  font-weight: bold;
+  font-family: monospace;
+  padding: 3px;
+}
+
+.complete-button:hover {
+  cursor: pointer;
+  background-color: #940494;
+}

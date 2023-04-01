@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const activeTab = tabs[0];
 
     triggerButton.addEventListener("click", () => {
-      alert('button click');
+      // alert('button click');
       chrome.tabs.sendMessage(activeTab.id, "triggered", function (response){
         console.log('button was triggered.');
       });
