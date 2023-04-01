@@ -10,3 +10,11 @@ body {
 .special-text {
     color: rgb(255, 255, 255);
 }
+
+#triggerButton {
+  background-color: #bb05bb;
+  color: white;
+  font-weight: bold;
+  font-family: monospace;
+  padding: 3px;
+}

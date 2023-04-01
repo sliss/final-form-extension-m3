@@ -1,4 +1,4 @@
-.complete-button {
+.ff-complete-button {
   background-color: #bb05bb;
   color: white;
   font-weight: bold;
@@ -6,7 +6,15 @@
   padding: 3px;
 }
 
-.complete-button:hover {
+.ff-complete-button:hover {
   cursor: pointer;
   background-color: #940494;
+}
+
+.ff-explanation {
+  max-width: 30%;
+  background-color: antiquewhite;
+  color: rgb(22, 22, 22);
+  font-family: monospace;
+  font-size: small;
 }
