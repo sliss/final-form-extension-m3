@@ -3,25 +3,25 @@
 // (see "content_script" key).
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
-const API_ENDPOINT = 'http://localhost:3000/api/';
+const API_ENDPOINT = 'http://localhost:3000/api';
 
 console.log(
   "This prints to the console of the page (injected only if the page url matched)"
 );
 
-// start targeting the current URL's firm
-const currentUrl = window.location.href;
-console.log(`researching firm at ${currentUrl}`);
+// // start targeting the current URL's firm
+// const currentUrl = window.location.href;
+// console.log(`researching firm at ${currentUrl}`);
 
-const targetResponse = await fetch(`${API_ENDPOINT}/target`, {
-  method: 'POST',
-  body: JSON.stringify({ url: currentUrl }),
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+// const targetResponse = await fetch(`${API_ENDPOINT}/target`, {
+//   method: 'POST',
+//   body: JSON.stringify({ url: currentUrl }),
+//   headers: {
+//     'Content-Type': 'application/json'
+//   }
+// });
 
-const targetPartner = await targetResponse.json();
+// const targetPartner = await targetResponse.json();
 
 
 let emoModeEnabled = false;
@@ -75,22 +75,23 @@ function addCompleteButtons() {
         console.log(`get answers. emo-mode?: ${emoModeEnabled}`);
         const response = await fetch(`${API_ENDPOINT}/search`, {
           method: "POST",
+          // mode: 'no-cors',
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ 
-            questionText: `${labelText}` ,
-            emoModeEnabled: emoModeEnabled
+            labelText
+            // emoModeEnabled: emoModeEnabled
           }),
         });
 
         
-
+        console.log('response', response);
         const data = await response.json(); // Save the data returned by the post request in a variable
         completeButton.innerHTML = "😊 Done";
 
         console.log("data", data);
-        const answerText = data.name;
+        const answerText = data.answer;
         console.log("answer text", answerText);
 
         // Save the input value before setting it to the new value
