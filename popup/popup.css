@@ -1,11 +1,12 @@
 body {
     background-color: #222;
     color: #eee;
+    font-family: monospace;
 
     width: 16rem;
     height: 4rem;
 }
 
 .special-text {
-    color: red;
+    color: rgb(255, 255, 255);
 }

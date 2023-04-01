@@ -4,6 +4,11 @@
 
 console.log("This prints to the console of the service worker (background script)")
 
+chrome.runtime.onInstalled.addListener(() => {
+  // default state goes here
+  // this runs ONE TIME ONLY (unless the user reinstalls your extension)
+});
+
 // Importing and using functionality from external files is also possible.
 importScripts('service-worker-utils.js')
 

@@ -1,8 +1,7 @@
 {
-    // Comments are accepted in the manifest, even though it is JSON.
     "manifest_version": 3,
-    "name": "Chrome Extension v3 Starter",
-    "description": "A minimal example of a chrome extension using manifest v3",
+    "name": "Final Form",
+    "description": "Final Form Chrome extension using manifest v3",
     "version": "0.0.1",
     "icons": {
         "16": "logo/logo-16.png",
@@ -14,7 +13,7 @@
         "default_title": "Chrome Addon v3 Starter",
         "default_popup": "popup/popup.html"
     },
-    "permissions": [],
+    "permissions": ["activeTab", "scripting"],
     "host_permissions": [
         "*://*/*"
     ],
@@ -22,7 +21,7 @@
         "service_worker": "service-worker.js"
     },
     "content_scripts": [{
-        "js": ["foreground.js"],
-        "matches": ["https://github.com/*"]
+        "js": ["contentScript.js"],
+        "matches": ["<all_urls>"]
     }]
 }

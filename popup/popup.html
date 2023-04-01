@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="popup.css">
-    <title>Chrome Addon v3: popup</title>
+  <script src="popup.js"></script>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+  <title>Chrome Addon v3: popup</title>
 </head>
 <body>
-    This is the <span class="special-text">HTML</span> body of the addon.
+  <p>Target Persona</p>
+  <p>This is the <span class="special-text">Hello Final Form</span> extension.</p>
+  <select id="target-personas">
+    <option value="ycombinator">YCombinator</option>
+    <option value="a16z">a16z</option>
+    <option value="contrary-capital">Contrary Capital</option>
+  </select>
+  <!-- <button id="complete-form-btn">✨Complete Form✨</button> -->
+
+  <button id="triggerButton">✨Complete Form✨</button>
+
 </body>
 </html>
