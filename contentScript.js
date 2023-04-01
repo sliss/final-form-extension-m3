@@ -7,19 +7,20 @@
 console.log(
   "This prints to the console of the page (injected only if the page url matched)"
 );
-
+let emoModeEnabled = false;
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log("messaged received", request);
-  if (request === "triggered") {
-    console.log("the popup button was triggered");
-
-    // add complete buttons.
-    addCompleteButtons();
-
-    sendResponse({ message: "trigger-success" });
-  } else if (request.message === "something_else") {
-    // sendResponse({ message: 'success' });
+  if (request.emoModeEnabled) {
+    console.log('EMO MODE ENABLED 😊 😊 😊 ');
+    emoModeEnabled = true;
   }
+  console.log("the popup button was triggered");
+
+  // add complete buttons.
+  addCompleteButtons();
+
+  sendResponse({ message: "trigger-success" });
+ 
 });
 
 function findLabelContainingElement(labelList, element) {
@@ -51,15 +52,19 @@ function addCompleteButtons() {
     completeButton.addEventListener("click", async (e) => {
       e.preventDefault();
 
-      console.log(elem.id, labelText, elem);
+      // console.log(elem.id, labelText, elem);
       completeButton.innerHTML = "Thinking...";
       try {
+        console.log(`get answers. emo-mode?: ${emoModeEnabled}`);
         const response = await fetch("http://localhost:3000/api/status", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ questionText: `${labelText}` }),
+          body: JSON.stringify({ 
+            questionText: `${labelText}` ,
+            emoModeEnabled: emoModeEnabled
+          }),
         });
 
         

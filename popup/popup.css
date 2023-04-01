@@ -22,3 +22,12 @@ body {
   cursor: pointer;
   background-color: #940494;
 }
+
+#emo-toggle {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
