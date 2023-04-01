@@ -46,13 +46,15 @@ function addCompleteButtons() {
     completeButton.textContent = "✨Complete";
     completeButton.className = "ff-complete-button";
 
+    let inputVal = elem.value;
+
     completeButton.addEventListener("click", async (e) => {
       e.preventDefault();
 
       console.log(elem.id, labelText, elem);
 
       try {
-        const response = await fetch("http://localhost:3000/api/search", {
+        const response = await fetch("http://localhost:3000/api/status", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -62,26 +64,33 @@ function addCompleteButtons() {
 
         const data = await response.json(); // Save the data returned by the post request in a variable
         console.log("data", data);
-        // const answerText = data.answerText;
         const answerText = data.name;
         console.log("answer text", answerText);
+
+        // Save the input value before setting it to the new value
+        inputVal = elem.value;
         elem.value = answerText;
 
         // add explanation
         const explanationDiv = document.createElement("div"); // Create a new <div> element to display the message
         explanationDiv.className = "ff-explanation"; // Set the class of the div to "message"
-        // explanationDiv.value = data.explanation;
         explanationDiv.textContent = data.version;
         elem.insertAdjacentElement("beforebegin", explanationDiv);
         elem.insertAdjacentHTML("beforebegin", "<br>"); //spacing
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
+    });
+
+    // Set the input value back to its previous value when the user clicks on another "Complete" button
+    elem.addEventListener("focus", () => {
+      elem.value = inputVal;
     });
 
     elem.insertAdjacentElement("afterend", completeButton);
   });
 }
+
 
 // function getDivsWithInputFields() {
 //   // Get all <div> elements on the page
