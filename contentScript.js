@@ -48,8 +48,11 @@ function addCompleteButtons() {
 
     completeButton.addEventListener("click", async (e) => {
       e.preventDefault();
+
+      console.log(elem.id, labelText, elem);
+
       try {
-        const response = await fetch("http://localhost:3000/api/status", {
+        const response = await fetch("http://localhost:3000/api/search", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
