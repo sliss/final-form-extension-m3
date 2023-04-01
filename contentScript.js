@@ -52,7 +52,7 @@ function addCompleteButtons() {
       e.preventDefault();
 
       console.log(elem.id, labelText, elem);
-
+      completeButton.innerHTML = "Thinking...";
       try {
         const response = await fetch("http://localhost:3000/api/status", {
           method: "POST",
@@ -62,7 +62,11 @@ function addCompleteButtons() {
           body: JSON.stringify({ questionText: `${labelText}` }),
         });
 
+        
+
         const data = await response.json(); // Save the data returned by the post request in a variable
+        completeButton.innerHTML = "😊 Done";
+
         console.log("data", data);
         const answerText = data.name;
         console.log("answer text", answerText);
@@ -72,11 +76,12 @@ function addCompleteButtons() {
         elem.value = answerText;
 
         // add explanation
-        const explanationDiv = document.createElement("div"); // Create a new <div> element to display the message
-        explanationDiv.className = "ff-explanation"; // Set the class of the div to "message"
-        explanationDiv.textContent = data.version;
-        elem.insertAdjacentElement("beforebegin", explanationDiv);
-        elem.insertAdjacentHTML("beforebegin", "<br>"); //spacing
+        // const explanationDiv = document.createElement("div"); // Create a new <div> element to display the message
+        // explanationDiv.className = "ff-explanation"; // Set the class of the div to "message"
+        // explanationDiv.textContent = data.version;
+        // elem.insertAdjacentElement("beforebegin", explanationDiv);
+        // elem.insertAdjacentHTML("beforebegin", "<br>"); //spacing
+
       } catch (error) {
         console.log(error);
       }
