@@ -95,8 +95,11 @@ function addCompleteButtons() {
         console.log("answer text", answerText);
 
         // Save the input value before setting it to the new value
-        inputVal = elem.value;
-        elem.value = answerText;
+        setInputValue(elem, answerText);
+        // prevents clearing the input if you click inside it
+        elem.addEventListener('focus', (event) => {
+          event.stopImmediatePropagation();
+        }, true); // Using the capture phase to handle the event before the original listener.
 
         // add explanation
         // const explanationDiv = document.createElement("div"); // Create a new <div> element to display the message
@@ -119,25 +122,8 @@ function addCompleteButtons() {
   });
 }
 
-
-// function getDivsWithInputFields() {
-//   // Get all <div> elements on the page
-//   const divs = document.getElementsByTagName("div");
-
-//   // Create an array to store the <div> elements that contain input fields
-//   const divsWithInputs = [];
-
-//   // Loop through all <div> elements
-//   for (let i = 0; i < divs.length; i++) {
-//     const div = divs[i];
-
-//     // Check if the <div> contains any input fields
-//     const inputs = div.getElementsByTagName("input");
-//     if (inputs.length > 0) {
-//       divsWithInputs.push(div);
-//     }
-//   }
-
-//   // Return the array of <div> elements that contain input fields
-//   return divsWithInputs;
-// }
+function setInputValue(input, value) {
+  const event = new InputEvent('input', { bubbles: true, cancelable: true });
+  input.value = value;
+  input.dispatchEvent(event);
+}
